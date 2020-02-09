@@ -130,5 +130,8 @@
       }
     }
   },
-  "defaultProject": "cloud-front"
+  "defaultProject": "cloud-front",
+  "cli": {
+    "analytics": "8e91d8c1-af6b-4179-b3cb-f70ea92f7f71"
+  }
 }
