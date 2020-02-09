@@ -1,0 +1,49 @@
+<div [ngBusy]="busy"></div>
+<p-dataView #dv [value]="books" [paginator]="true" [rows]="20" paginatorPosition="both"
+    [sortField]="sortField" layout="grid">
+    <p-header>
+        <div class="ui-helper-clearfix">
+            <div class="ui-g">
+                <div class="ui-g-12 ui-md-4">
+                    <p-dropdown [options]="sortOptions" [(ngModel)]="sortField" placeholder="Sort By"
+                        (onChange)="onSortChange($event)" [style]="{'min-width':'140px'}"></p-dropdown>
+                </div>
+                <div class="ui-g-6 ui-md-4 filter-container">
+                    <div style="position:relative">
+                        <input type="search" pInputText [(ngModel)]="searchInput" placeholder="Search"
+                            (input)="search($event.target.value)">
+                    </div>
+                </div>
+            </div><br>
+            <div class="row justify-content-center">
+                <div class="col-4">
+                    <p-radioButton (onClick)="onRadioChange()" name="group" value="normal" label="Basic Research" [(ngModel)]="selected" inputId="preopt"></p-radioButton>
+                </div>
+                <div class="col-4">
+                    <p-radioButton (onClick)="onRadioChange()" name="group" value="regex" label="Regex Research" [(ngModel)]="selected" inputId="preopt"></p-radioButton>
+                </div>
+            </div>
+        </div>
+    </p-header>
+    <ng-template let-book pTemplate="gridItem">
+        <div style="padding:.5em" class="ui-g-12 ui-md-3">
+            <p-panel [header]="book.name" [style]="{'text-align':'center'}">
+                <div class="book-detail">{{book.name}} - {{book.name}}</div>
+                <hr class="ui-widget-content" style="border-top:0">
+                <button pButton type="button" icon="pi pi-search" (click)="selectbook($event, book)"
+                    style="margin-top:0"></button>
+            </p-panel>
+        </div>
+    </ng-template>
+</p-dataView>
+
+<p-dialog header="book Details" appendTo="body" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true"
+    [style]="{width: '225px'}" (onAfterHide)="onDialogHide()">
+    <div class="ui-g" *ngIf="selectedBook">
+        <div class="ui-g-4">Name: </div>
+        <div class="ui-g-8">{{selectedBook.name}}</div>
+
+        <div class="ui-g-4">Name: </div>
+        <div class="ui-g-8">{{selectedBook.name}}</div>
+    </div>
+</p-dialog>
